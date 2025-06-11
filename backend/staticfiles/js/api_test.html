@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Test Tool</h1>
+    
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" value="admin">
+    </div>
+    
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" value="admin">
+    </div>
+    
+    <button id="loginBtn">Test Login</button>
+    
+    <h3>Request:</h3>
+    <pre id="request"></pre>
+    
+    <h3>Response:</h3>
+    <pre id="response"></pre>
+    
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            const requestData = {
+                username: username,
+                password: password
+            };
+            
+            document.getElementById('request').textContent = JSON.stringify(requestData, null, 2);
+            
+            try {
+                const response = await fetch('/api/login/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                const data = await response.json();
+                document.getElementById('response').textContent = 
+                    `Status: ${response.status}\n` +
+                    JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('response').textContent = 
+                    `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html> 

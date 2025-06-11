@@ -1,0 +1,259 @@
+:root {
+  --background-color: #ffffff;
+  --text-color: #202224;
+  --secondary-text-color: #636566;
+  --muted-text-color: #606060;
+  --card-background-color: #ffffff;
+  --select-background-color: #fcfdfd;
+  --select-text-color: #b8babc;
+  --chart-line-color1: #F56565;
+  --chart-line-color2: #4A5568;
+  --sidebar-width: 20.5%;
+  --navbar-height: 60px;
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --border-color: #e0e0e0;
+}
+body.dark-mode {
+  --background-color: #1B2431;
+  --text-color: #e0e0e0;
+  --secondary-text-color: #b0b0b0;
+  --muted-text-color: #a0a0a0;
+  --card-background-color: #273142;
+  --select-background-color: #273142;
+  --select-text-color: #dddddd;
+  --chart-line-color1: #ff6b6b;
+  --chart-line-color2: #a0aec0;
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  --border-color: #3A4557;
+}
+/* ndashboard.css */
+
+.dashboard {
+  width: 100%;
+  background-color: var(--background-color);
+  padding: 20px;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.total-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.data {
+  min-height: 161px;
+  height: 100%;
+  border-radius: 14px;
+  background-color: var(--card-background-color);
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.data .title {
+  padding-right: 17px;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+  padding-bottom: 16px;
+  font-size: 16px;
+  margin: 0;
+}
+
+.data .stat-des {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.data .value {
+  padding-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.data .trend-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--muted-text-color);
+  margin: 0;
+}
+
+.conatiner-icon {
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.traffic-trends-chart {
+  background-color: var(--card-background-color);
+  min-height: 444px;
+  border-radius: 14px;
+  padding: 32px;
+  margin-top: 30px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+}
+
+.traffic-trends-chart .traffic-trends-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 37.32px;
+}
+
+.traffic-trends-chart-header .title {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+select {
+  width: 104px;
+  padding: 8.5px 16px;
+  min-height: 26.01px;
+  border-radius: 4px !important;
+  border-color: var(--border-color);
+  background-color: var(--select-background-color) !important;
+  color: var(--select-text-color) !important;
+  font-weight: 400 !important;
+  font-size: 12px;
+  outline: none !important;
+}
+
+.container-charts {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.container-charts .title {
+  color: var(--text-color);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 33px;
+}
+
+.container-charts .type-of-attack-chart,
+.container-charts .top-agents-chart {
+  background-color: var(--card-background-color);
+  border-radius: 14px;
+  width: calc(50% - 15px);
+  height: 365px;
+  padding: 24px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 1400px) {
+  .total-data {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  .container-charts .type-of-attack-chart,
+  .container-charts .top-agents-chart {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .container-charts {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .total-data {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .traffic-trends-chart {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    padding: 10px;
+  }
+  
+  .data {
+    min-height: 140px;
+  }
+  
+  .data .title {
+    padding-bottom: 10px;
+  }
+  
+  .data .value {
+    padding-bottom: 15px;
+    font-size: 24px;
+  }
+}
+
+/* ApexCharts dark mode overrides */
+body.dark-mode .apexcharts-tooltip {
+  background-color: #1B2431 !important;
+  border-color: #3A4557 !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .apexcharts-tooltip-title {
+  background-color: #273142 !important;
+  border-color: #3A4557 !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .apexcharts-legend-text {
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .apexcharts-xaxis-label,
+body.dark-mode .apexcharts-yaxis-label {
+  fill: #b0b0b0 !important;
+}
+
+body.dark-mode .apexcharts-grid line {
+  stroke: #3A4557 !important;
+}
+
+.chart-container {
+  background-color: var(--card-background-color);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  padding: 24px;
+  height: 100%;
+  min-height: 400px;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container .title {
+  color: var(--text-color);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ApexCharts dark mode overrides */
+body.dark-mode .apexcharts-tooltip {
+  background-color: #1B2431 !important;
+  border-color: #3A4557 !important;
+  color: #e0e0e0 !important;
+}

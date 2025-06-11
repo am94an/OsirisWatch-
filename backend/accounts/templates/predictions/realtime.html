@@ -1,0 +1,46 @@
+<!-- realtime_prediction/templates/predictions/realtime.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-time Prediction</title>
+</head>
+<body>
+    <h1>Real-time Attack Prediction</h1>
+    <div id="prediction">Waiting for data...</div>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:8000/ws/predict/');
+
+        socket.onopen = function(event) {
+            console.log("WebSocket is open now.");
+
+            // مثال: إرسال بيانات الحزم في الوقت الحقيقي (يجب تعديل هذه البيانات حسب الحاجة)
+            const packetData = {
+                source_ip: "192.168.1.1",
+                destination_ip: "192.168.1.10",
+                packet_count: 20,
+                byte_count: 1500
+            };
+            socket.send(JSON.stringify(packetData));
+        };
+
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            if (data.error) {
+                document.getElementById('prediction').textContent = data.error;
+            } else {
+                document.getElementById('prediction').textContent = `
+                    Prediction for session ${data.session_id}: ${data.prediction}
+                    Source IP: ${data.source_ip}, Destination IP: ${data.destination_ip},
+                    Timestamp: ${data.timestamp}
+                `;
+            }
+        };
+
+        socket.onclose = function(event) {
+            console.log("WebSocket is closed now.");
+        };
+    </script>
+</body>
+</html>

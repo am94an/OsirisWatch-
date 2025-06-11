@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body class="{% if request.COOKIES.dark_mode == 'true' %}dark-mode{% endif %}">
+    <header class="navbar">
+        <div class="search-box">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="nav-right">
+            <div class="notification" onclick="toggleNotificationDropdown()">
+                <i class="fas fa-bell"></i>
+                <span class="badge">{{ notifications|length }}</span>
+            </div>
+            <div class="profile">
+                <img src="{% static 'img/avatar.png' %}" alt="Profile Picture">
+                <div class="profile-user">
+                    <span class="profile-name">{{ name }}</span>
+                    <span class="role">{{ role }}</span>
+                </div>
+                <i class="fas fa-chevron-down" onclick="toggleDropdown()"></i>
+        
+                <div class="dropdown">
+                    <div id="dropdown-content" class="dropdown-content">
+                        <a href="#">Manage Account</a>
+                        <a href="#">Change Password</a>
+                        <a href="#">Activity Log</a>
+                        <a href="{% url 'dashboard:logout' %}">Log out</a>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Notification Dropdown -->
+            <div id="notification-dropdown" class="notification-dropdown">
+                {% for notification in notifications %}
+                    <div class="notification-item" data-id="{{ notification.id }}">
+                        <p>{{ notification.message }}</p>
+                        <span class="notification-time">{{ notification.timestamp }}</span>
+                        <button class="mark-read">Mark as Read</button>
+                    </div>
+                {% empty %}
+                    <div class="notification-item">
+                        <p>No notifications available.</p>
+                    </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+            </header>
+
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Osiris<span>Watch</span></h2>
+        </div>
+        <div class="menu-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+            <a href="{% url 'dashboard:dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        </div>
+        <div class="menu-item {% if request.resolver_match.url_name == 'data_analysis' %}active{% endif %}">
+            <a href="{% url 'dashboard:data_analysis' %}"><i class="fas fa-chart-line"></i> Data Analysis</a>
+        </div>
+        <div class="menu-item {% if request.resolver_match.url_name == 'event_details' %}active{% endif %}">
+            <a href="{% url 'dashboard:event_details' %}"><i class="fas fa-calendar"></i> Event Details</a>
+        </div>
+        <div class="divider"></div>
+        <div class="menu-item {% if request.resolver_match.url_name == 'reports' %}active{% endif %}">
+            <a href="{% url 'dashboard:reports' %}"><i class="fas fa-file-alt"></i> Reports</a>
+        </div>
+        <div class="menu-item {% if request.resolver_match.url_name == 'help_support' %}active{% endif %}">
+            <a href="{% url 'dashboard:help_support' %}"><i class="fas fa-question-circle"></i> Help & Support</a>
+        </div>
+        <div class="menu-item {% if request.resolver_match.url_name == 'activity' %}active{% endif %}">
+            <a href="{% url 'dashboard:activity' %}"><i class="fas fa-list"></i> Activity Log</a>
+        </div>
+        <div class="menu-item {% if request.resolver_match.url_name == 'Notification' %}active{% endif %}">
+            <a href="{% url 'dashboard:notification' %}"><i class="fas fa-exclamation-circle"></i> Error/Notification</a>
+        </div>
+        <div class="divider"></div>
+        <div class="menu-item {% if request.resolver_match.url_name == 'user_management' %}active{% endif %}">
+            <a href="{% url 'dashboard:user_management' %}"><i class="fas fa-users"></i> User Management</a>
+        </div>
+        <div class="menu-item {% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
+            <a href="{% url 'dashboard:settings' %}"><i class="fas fa-cog"></i> Settings</a>
+        </div>
+        <div class="dark-mode-switch">
+            <span>Dark Mode</span>
+            <div class="toggle-wrapper">
+                <input type="checkbox" id="dark-mode-toggle" style="display: none;" {% if request.COOKIES.dark_mode == 'true' %}checked{% endif %}>
+                <div class="toggle">
+                    <div class="toggle-circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        {% block content %}
+        <!-- Main content will be injected here -->
+        {% endblock %}
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        document.querySelectorAll('.mark-read').forEach(button => {
+            button.addEventListener('click', function() {
+                const notificationId = this.parentElement.getAttribute('data-id');
+                fetch(`/mark_notification/${notificationId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',  
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        this.parentElement.style.display = 'none'; 
+                        const badge = document.querySelector('.badge');
+                        badge.textContent = parseInt(badge.textContent) - 1;  
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+            
+</body>
+</html>

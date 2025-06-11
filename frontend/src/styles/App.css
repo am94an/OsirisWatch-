@@ -1,0 +1,355 @@
+:root {
+  --auth-bg-color: #007bff;
+  --container-bg-color: #ffffff;
+  --container-text-color: #333333;
+  --input-border-color: #ddd;
+  --button-bg-color: #007bff;
+  --button-hover-bg-color: #0056b3;
+  --toast-success-bg: #4caf50;
+  --toast-error-bg: #f44336;
+  --toast-info-bg: #2196F3;
+}
+
+body.dark-mode {
+  --auth-bg-color: #273142;
+  --container-bg-color: #1B2431;
+  --container-text-color: #e0e0e0;
+  --input-border-color: #555;
+  --button-bg-color: #4880ff;
+  --button-hover-bg-color: #0056b3;
+  --toast-success-bg: #4caf50;
+  --toast-error-bg: #f44336;
+  --toast-info-bg: #2196F3;
+}
+
+body.auth-layout {
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: var(--auth-bg-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  width: 87.4%; 
+  padding: 2rem;
+  background-color: var(--container-bg-color);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container h2 {
+  margin-bottom: 20px;
+  color: var(--container-text-color);
+}
+
+.container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 3px solid var(--input-border-color);
+  border-radius: 8px;
+}
+
+.container button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--button-bg-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.container button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+.container p {
+  color: var(--auth-bg-color);
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.remember-me input {
+  margin-right: 6px;
+}
+
+.remember-me span {
+  font-size: 14px;
+  color: var(--container-text-color);
+}
+
+@keyframes wave {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-5px);
+  }
+}
+
+.top-svgs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  animation: wave 3s ease-in-out infinite;
+  z-index: -1;
+}
+
+.bottom-svgs {
+  position: absolute;
+  bottom: -800px;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  animation: wave 3s ease-in-out infinite;
+  z-index: -1;
+}
+
+ /* 
+@media (max-width: 600px) {
+  .container {
+    width: 90%; 
+  }
+}
+
+@media (min-width: 601px) {
+  .container {
+    width: 50%; 
+  }
+}
+*/
+
+.toast {
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.toast.success {
+  background-color: var(--toast-success-bg);
+  color: white;
+}
+
+.toast.error {
+  background-color: var(--toast-error-bg);
+  color: white;
+}
+
+.toast.info {
+  background-color: var(--toast-info-bg);
+  color: white;
+}
+.Toastify__close-button {
+  display: none;
+}
+
+.auth-container {
+  margin: 0 auto;
+  width: 360px;
+  padding: 30px;
+  background: var(--container-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.auth-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--container-text-color);
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  font-size: 13px;
+  color: #666666;
+  margin-bottom: 20px;
+}
+
+.auth-label {
+  display: block;
+  text-align: left;
+  margin: 8px 0 4px;
+  font-size: 13px;
+  color: var(--container-text-color);
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #F7F7F7;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.auth-input:focus {
+  border-color: #4A90E2;
+  outline: none;
+}
+
+.remember-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666666;
+}
+
+.remember-container input[type="checkbox"] {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--button-bg-color);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+.auth-text {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 16px;
+}
+
+.auth-link {
+  color: #4A90E2;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+.password-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot-password {
+  font-size: 12px;
+  color: #4A90E2;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.reset-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  padding: 2rem;
+  background-color: var(--container-bg-color);
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.reset-container h2 {
+  margin-bottom: 20px;
+  color: var(--container-text-color);
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.reset-container label {
+  display: block;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--container-text-color);
+}
+
+.reset-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 4px 0 10px 0;
+  border: 2px solid var(--input-border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #F7F7F7;
+  transition: border-color 0.3s;
+}
+
+.reset-container input:focus {
+  border-color: var(--button-bg-color);
+  outline: none;
+}
+
+.reset-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--button-bg-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.reset-container button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+

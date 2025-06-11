@@ -1,0 +1,210 @@
+:root {
+  --bg-login-color: #4880FF;
+  --bt-login: #476bd6;
+  --nav-color: #ffffff;
+  --side-color: #ffffff;
+  --bg-color: #ffffff;
+  --search-bg: #f0f2f5;
+  --icon-color: #6c757d;
+  --text-color: #333333;
+  --text-muted: #999999;
+  --scrollbar-bg: #e0e0e0;
+  --scrollbar-thumb: #b0b0b0;
+  --scrollbar-thumb-hover: #888888;
+  --sidebar-width: 20.5%;
+  --navbar-height: 60px;
+  --border-color: #e0e0e0;
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode {
+  --nav-color: #273142;
+  --side-color: #273142;
+  --bg-color: #1B2431;
+  --search-bg: #34495e;
+  --icon-color: #6c757d;
+  --text-color: #ffffff;
+  --text-muted: #bdc3c7;
+  --scrollbar-bg: #333;
+  --scrollbar-thumb: #555;
+  --scrollbar-thumb-hover: #777;
+  --border-color: #3A4557;
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.main-layout {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  overflow-x: hidden;
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.content {
+  margin-left: var(--sidebar-width);
+  margin-top: var(--navbar-height);
+  width: calc(100% - var(--sidebar-width));
+  min-height: calc(100vh - var(--navbar-height));
+  padding: 20px;
+  background-color: var(--bg-color);
+  transition: all 0.3s ease;
+}
+
+/* Dark mode styling */
+body.dark-mode {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.dark-mode .logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.dark-mode .logo h2 {
+  font-size: 24px;
+  color: var(--text-color);
+}
+
+.dark-mode .logo span {
+  color: var(--text-color);
+}
+
+.dark-mode .sidebar {
+  background-color: var(--side-color);
+  color: var(--text-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.dark-mode .menu-item {
+  color: var(--text-color);
+}
+
+.dark-mode .menu-item i {
+  background-color: var(--icon-color);
+  color: var(--text-color);
+}
+
+.dark-mode .menu-item.active {
+  background-color: #0056b3;
+  color: white;
+}
+
+.dark-mode .menu-item.active i {
+  background-color: white;
+  color: #0056b3;
+}
+
+.dark-mode .menu-item:hover {
+  background-color: var(--icon-color);
+}
+
+/* Charts dark mode overrides */
+.dark-mode .apexcharts-canvas {
+  background-color: var(--side-color) !important;
+}
+
+.dark-mode .apexcharts-text,
+.dark-mode .apexcharts-title-text,
+.dark-mode .apexcharts-legend-text {
+  fill: var(--text-color) !important;
+  color: var(--text-color) !important;
+}
+
+.dark-mode .apexcharts-tooltip {
+  background-color: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .apexcharts-tooltip-title {
+  background-color: var(--side-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark-mode .apexcharts-xaxis-label,
+.dark-mode .apexcharts-yaxis-label {
+  fill: var(--text-muted) !important;
+}
+
+.dark-mode .apexcharts-gridline {
+  stroke: var(--border-color) !important;
+}
+
+/* Loading and Error states */
+.loading-container, 
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  gap: 20px;
+  color: var(--text-color);
+}
+
+.error-container button {
+  padding: 10px 20px;
+  background-color: var(--bg-login-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbar-bg);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+/* Responsive styles */
+@media (max-width: 991px) {
+  :root {
+    --sidebar-width: 250px;
+  }
+  
+  .content {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 0;
+  }
+  
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+    width: 250px;
+  }
+  
+  .content {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+

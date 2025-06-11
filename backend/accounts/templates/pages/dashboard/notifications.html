@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+
+{% block title %}notification{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div id="reports-section" class="content-section active">
+        <h1>notification</h1>
+        <div class="notification-dropdown show">
+            {% for notification in notifications %}
+                <div class="notification-item{% if notification.is_read %} read{% endif %}">
+                    <p>{{ notification.message }}</p>
+                    <a href="{% url 'mark_notification_as_read' notification.id %}">Mark as read</a>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+</div>
+{% endblock %}
